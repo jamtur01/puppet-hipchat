@@ -1,0 +1,4 @@
+---
+:hipchat_api: 'apikey'
+:hipchat_room: 'roomname'
+:hipchat_notify: 'false'
