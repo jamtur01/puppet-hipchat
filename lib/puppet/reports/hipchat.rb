@@ -24,7 +24,7 @@ Puppet::Reports.register_report(:hipchat) do
       Puppet.debug "Sending status for #{self.host} to Hipchat channel #{HIPCHAT_ROOM}"
         msg = "Puppet run for #{self.host} #{self.status} at #{Time.now.asctime}"
         client = HipChat::Client.new(HIPCHAT_API)
-        client[HIPCHAT_ROOM].send('Puppet', msg, HIPCHAT_NOTIFY)
+        client[HIPCHAT_ROOM].send('Puppet', msg, :notify => HIPCHAT_NOTIFY)
     end
   end
 end
