@@ -26,8 +26,9 @@ Installation & Usage
     with a type of Admin.  Record the API key that is generated.
 
 4.  Update the `hipchat_api` and `hipchat_room` variables in the `hipchat.yaml` file with 
-    your hipchat connection details and copy the file to `/etc/puppet/`. An option to notify 
-    users in the room `hipchat_notify` defaults to `false`. An example file is included.
+    your hipchat connection details and copy the file to `/etc/puppet/` or for puppet enterpise '/etc/puppetlabs/puppet'.
+    An option to notify  users in the room `hipchat_notify` defaults to `false`. You can also change the default notification color from
+    yellow to red, green,purple or random. An example file is included.
 
 5.  Enable pluginsync and reports on your master and clients in `puppet.conf`
 
