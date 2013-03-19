@@ -1,4 +1,5 @@
 ---
 :hipchat_api: 'apikey'
 :hipchat_room: 'roomname'
+:hipchat_room_color: 'red'
 :hipchat_notify: 'false'
