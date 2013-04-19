@@ -16,7 +16,7 @@ Puppet::Reports.register_report(:hipchat) do
   HIPCHAT_ROOM = config[:hipchat_room]
   HIPCHAT_NOTIFY = config[:hipchat_notify]
   # set the default color as yellow if not defined
-  HIPCHAT_NOTIFY_COLOR = config[:hipchat_notify_color].blank ? 'yellow' : config[:hipchat_notify_color]
+  HIPCHAT_NOTIFY_COLOR = config[:hipchat_notify_color] || 'yellow'
 
   desc <<-DESC
   Send notification of failed reports to a Hipchat room.
