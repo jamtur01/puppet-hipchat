@@ -3,3 +3,5 @@
 :hipchat_room: 'roomname'
 :hipchat_notify_color: 'red'
 :hipchat_notify: 'false'
+:hipchat_statuses:
+  - failed

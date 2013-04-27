@@ -4,7 +4,7 @@ puppet-hipchat
 Description
 -----------
 
-A Puppet report handler for sending notifications of failed runs to [HipChat](http://www.hipchat.com).
+A Puppet report handler for sending notifications of Puppet runs to [HipChat](http://www.hipchat.com).
 
 Requirements
 ------------
@@ -31,7 +31,8 @@ Installation & Usage
 4.  Update the `hipchat_api` and `hipchat_room` variables in the `hipchat.yaml` file with 
     your hipchat connection details and copy the file to `/etc/puppet/` or for puppet enterpise '/etc/puppetlabs/puppet'.
     An option to notify  users in the room `hipchat_notify` defaults to `false`. You can also change the default notification color from
-    yellow to red, green,purple or random. An example file is included.
+    yellow to red, green,purple or random. The `hipchat_statuses` should be an array of statuses to send notifications
+    for and defaults to `'failed'`. Specify `'all'` to receive notifications from all Puppet runs. An example file is included.
 
 5.  Enable pluginsync and reports on your master and clients in `puppet.conf`
 
