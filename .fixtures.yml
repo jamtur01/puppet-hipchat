@@ -1,0 +1,4 @@
+fixtures:
+  symlinks:
+    puppet_hipchat: "#{source_dir}"
+
