@@ -18,14 +18,17 @@ Puppet::Reports.register_report(:hipchat) do
   HIPCHAT_STATUSES = Array(config[:hipchat_statuses] || 'failed')
   # set the default color as yellow if not defined
   HIPCHAT_NOTIFY_COLOR = config[:hipchat_notify_color] || 'yellow'
-  HIPCHAT_DISABLED = File.exists?(File.join([File.dirname(Puppet.settings[:config]), 'hipchat_disabled']))
+  DISABLED_FILE = File.join([File.dirname(Puppet.settings[:config]), 'hipchat_disabled'])
 
   desc <<-DESC
   Send notification of failed reports to a Hipchat room.
   DESC
 
   def process
-    if (HIPCHAT_STATUSES.include?(self.status) || HIPCHAT_STATUSES.include?('all')) && !HIPCHAT_DISABLED
+    # Disabled check here to ensure it is checked for every report
+    disabled = File.exists?(DISABLED_FILE)
+
+    if (HIPCHAT_STATUSES.include?(self.status) || HIPCHAT_STATUSES.include?('all')) && !disabled
       Puppet.debug "Sending status for #{self.host} to Hipchat channel #{HIPCHAT_ROOM}"
         msg = "Puppet run for #{self.host} #{self.status} at #{Time.now.asctime}"
         client = HipChat::Client.new(HIPCHAT_API)
