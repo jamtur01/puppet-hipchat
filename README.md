@@ -48,6 +48,11 @@ gem using the puppet-bundled gem library:
 
 6.  Run the Puppet client and sync the report as a plugin
 
+7.  To temporarially disable HipChat notifications add a file named 'hipchat_disabled' in the same path as hipchat.yaml.
+	(Removing it will re-enable notifications)
+
+		$ touch /etc/puppet/hipchat_disabled
+
 Author
 ------
 
