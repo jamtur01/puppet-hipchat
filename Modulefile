@@ -1,4 +1,4 @@
-name 'jamtur01-puppet_hipchat'
+name 'puppet_hipchat'
 version '0.2.0'
 license 'Apache 2.0'
 summary 'A Puppet report handler for sending notifications of failed runs to HipChat'
