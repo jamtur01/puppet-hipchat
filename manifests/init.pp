@@ -7,6 +7,8 @@ class puppet_hipchat (
   $config_file  = "${puppet_hipchat::params::puppetconf_path}/hipchat.yaml",
 ) inherits puppet_hipchat::params {
 
+  include puppet_hipchat::install
+
   file { $config_file:
     ensure  => file,
     owner   => 'puppet',
