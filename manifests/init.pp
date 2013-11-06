@@ -4,8 +4,8 @@ class puppet_hipchat (
   $notify_color = 'red',
   $notify_room  = false,
   $statuses     = [ 'failed' ],
-  $config_file  = '/etc/puppet/hipchat.yaml',
-){
+  $config_file  = "${puppet_hipchat::params::puppetconf_path}/hipchat.yaml",
+) inherits puppet_hipchat::params {
 
   file { $config_file:
     ensure  => file,
@@ -13,8 +13,5 @@ class puppet_hipchat (
     group   => 'puppet',
     mode    => '0440',
     content => template('puppet_hipchat/hipchat.yaml.erb'),
-
   }
-
 }
-
