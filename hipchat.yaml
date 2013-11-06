@@ -3,5 +3,7 @@
 :hipchat_room: 'roomname'
 :hipchat_notify_color: 'red'
 :hipchat_notify: 'false'
+:hipchat_proxy: 'http://username:password@proxy_host:8080'
 :hipchat_statuses:
   - failed
+
