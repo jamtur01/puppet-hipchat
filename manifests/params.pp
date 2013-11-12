@@ -1,4 +1,7 @@
 class puppet_hipchat::params {
+
+  $package_name = 'hipchat'
+
   if $::is_pe == 'true' {
     $puppetconf_path = '/etc/puppetlabs/puppet'
     $provider        = 'pe_gem'

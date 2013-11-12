@@ -5,9 +5,9 @@ class puppet_hipchat (
   $notify_room  = false,
   $statuses     = [ 'failed' ],
   $config_file  = "${puppet_hipchat::params::puppetconf_path}/hipchat.yaml",
+  $package_name = $puppet_hipchat::params::package_name,
+  $provider     = $puppet_hipchat::params::package_provider,
 ) inherits puppet_hipchat::params {
-
-  include puppet_hipchat::install
 
   file { $config_file:
     ensure  => file,
@@ -15,5 +15,10 @@ class puppet_hipchat (
     group   => 'puppet',
     mode    => '0440',
     content => template('puppet_hipchat/hipchat.yaml.erb'),
+  }
+
+  package { $package_name:
+    ensure   => installed,
+    provider => $provider,
   }
 }
