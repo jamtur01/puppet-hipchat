@@ -19,8 +19,8 @@ Installation & Usage
 
         $ sudo gem install hipchat
 
-        NOTE FOR PUPPET ENTERPRISE USERS: You must install the hipchat
-gem using the puppet-bundled gem library: 
+*NOTE FOR PUPPET ENTERPRISE USERS*: You must install the `hipchat` gem using the
+puppet-bundled gem library: 
 
         $ /opt/puppet/bin/gem install hipchat
 
