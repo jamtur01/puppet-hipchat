@@ -6,7 +6,7 @@ class puppet_hipchat (
   $statuses     = [ 'failed' ],
   $config_file  = "${puppet_hipchat::params::puppetconf_path}/hipchat.yaml",
   $package_name = $puppet_hipchat::params::package_name,
-  $provider     = $puppet_hipchat::params::package_provider,
+  $provider     = $puppet_hipchat::params::provider,
 ) inherits puppet_hipchat::params {
 
   file { $config_file:
