@@ -3,7 +3,7 @@ require 'yaml'
 
 begin
   require 'hipchat'
-rescue LoadError => e
+rescue LoadError
   Puppet.info "You need the `hipchat` gem to use the Hipchat report"
 end
 
@@ -26,8 +26,12 @@ Puppet::Reports.register_report(:hipchat) do
   DISABLED_FILE = File.join([File.dirname(Puppet.settings[:config]), 'hipchat_disabled'])
   HIPCHAT_PROXY = config[:hipchat_proxy]
 
+  if HIPCHAT_PROXY && (RUBY_VERSION < '1.9.3' || Gem.loaded_specs["hipchat"].version < '1.0.0')
+    raise(Puppet::SettingsError, "hipchat_proxy requires ruby >= 1.9.3 and hipchat gem >= 1.0.0")
+  end
+
   desc <<-DESC
-  Send notification of failed reports to a Hipchat room.
+  Send notification of puppet runs to a Hipchat room.
   DESC
 
   def color(status)
@@ -46,11 +50,11 @@ Puppet::Reports.register_report(:hipchat) do
   def emote(status)
     case status
     when 'failed'
-      fail_message = "(failed)"
+      '(failed)'
     when 'changed'
-      changed_message = "(successful)"
+      '(successful)'
     when 'unchanged'
-      unchanged_message = "(continue)"
+      '(continue)'
     end
   end
 
@@ -61,7 +65,11 @@ Puppet::Reports.register_report(:hipchat) do
     if (HIPCHAT_STATUSES.include?(self.status) || HIPCHAT_STATUSES.include?('all')) && !disabled
       Puppet.debug "Sending status for #{self.host} to Hipchat channel #{HIPCHAT_ROOM}"
         msg = "Puppet run for #{self.host} #{emote(self.status)} #{self.status} at #{Time.now.asctime} on #{self.configuration_version} in #{self.environment}"
-        client = HipChat::Client.new(HIPCHAT_API, :http_proxy => HIPCHAT_PROXY)
+        if HIPCHAT_PROXY
+          client = HipChat::Client.new(HIPCHAT_API, :http_proxy => HIPCHAT_PROXY)
+        else
+          client = HipChat::Client.new(HIPCHAT_API)
+        end
         client[HIPCHAT_ROOM].send('Puppet', msg, :notify => HIPCHAT_NOTIFY, :color => color(self.status), :message_format => 'text')
     end
   end
