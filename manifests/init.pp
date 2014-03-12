@@ -9,6 +9,7 @@ class puppet_hipchat (
   $provider     = $puppet_hipchat::params::provider,
   $owner        = $puppet_hipchat::params::owner,
   $group        = $puppet_hipchat::params::group,
+  $puppetboard  = $puppet_hipchat::params::puppetboard,
 ) inherits puppet_hipchat::params {
 
   file { $config_file:
