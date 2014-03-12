@@ -34,7 +34,7 @@ puppet-bundled gem library:
     your hipchat connection details and copy the file to `/etc/puppet/` or for puppet enterpise '/etc/puppetlabs/puppet'.
     An option to notify  users in the room `hipchat_notify` defaults to `false`. You can also change the default notification color from
     yellow to red, green,purple or random. The `hipchat_statuses` should be an array of statuses to send notifications
-    for and defaults to `'failed'`. Specify `'all'` to receive notifications from all Puppet runs. In order to send notifications through proxy server set `hipchat_proxy` to http proxy url using this format `'http://username:password@proxy_host:proxy_port'`. An example file is included.
+    for and defaults to `'failed'`. Specify `'all'` to receive notifications from all Puppet runs. In order to send notifications through proxy server set `hipchat_proxy` to http proxy url using this format `'http://username:password@proxy_host:proxy_port'`. If you use Puppetboard (https://github.com/nedap/puppetboard) set `hipchat_puppetboard` to the base URL of your Puppetboard installation, e.g. `'http://puppetboard.example.com'` and a link to the node's latest report will be send with the message to hipchat. An example file is included.
 
 5.  Enable pluginsync and reports on your master and clients in `puppet.conf`
 

@@ -1,6 +1,7 @@
 class puppet_hipchat::params {
 
   $package_name = 'hipchat'
+  $puppetboard  = 'false'
 
   if $::is_pe == 'true' {
     $puppetconf_path = '/etc/puppetlabs/puppet'
