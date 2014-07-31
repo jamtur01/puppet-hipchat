@@ -1,3 +1,7 @@
+# Class: puppet_hipchat
+#
+# Send Puppet report information to HipChat
+#
 class puppet_hipchat (
   $api_key,
   $room,
@@ -10,6 +14,7 @@ class puppet_hipchat (
   $owner        = $puppet_hipchat::params::owner,
   $group        = $puppet_hipchat::params::group,
   $puppetboard  = $puppet_hipchat::params::puppetboard,
+  $dashboard    = $puppet_hipchat::params::dashboard,
 ) inherits puppet_hipchat::params {
 
   file { $config_file:
