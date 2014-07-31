@@ -18,6 +18,7 @@ Puppet::Reports.register_report(:hipchat) do
   HIPCHAT_NOTIFY = config[:hipchat_notify]
   HIPCHAT_STATUSES = Array(config[:hipchat_statuses] || 'failed')
   HIPCHAT_PUPPETBOARD = config[:hipchat_puppetboard]
+  HIPCHAT_DASHBOARD = config[:hipchat_dashboard]
 
   # set the default colors if not defined in the config
   HIPCHAT_FAILED_COLOR = config[:failed_color] || 'red'
@@ -68,6 +69,8 @@ Puppet::Reports.register_report(:hipchat) do
         msg = "Puppet run for #{self.host} #{emote(self.status)} #{self.status} at #{Time.now.asctime} on #{self.configuration_version} in #{self.environment}"
         if HIPCHAT_PUPPETBOARD != 'false'
           msg << ": #{HIPCHAT_PUPPETBOARD}/report/latest/#{self.host}"
+        elsif HIPCHAT_DASHBOARD != 'false'
+          msg << ": #{HIPCHAT_DASHBOARD}/nodes/#{self.host}/view"
         end
         if HIPCHAT_PROXY
           client = HipChat::Client.new(HIPCHAT_API, :http_proxy => HIPCHAT_PROXY)

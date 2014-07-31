@@ -1,7 +1,12 @@
+# Class: puppet_hipchat::params
+#
+# Parameterize for Puppet platform.
+#
 class puppet_hipchat::params {
 
   $package_name = 'hipchat'
   $puppetboard  = 'false'
+  $dashbaord    = 'false'
 
   if $::is_pe == 'true' {
     $puppetconf_path = '/etc/puppetlabs/puppet'
