@@ -1,6 +1,6 @@
 {
-  "name": "jamtur01-hipchat",
-  "version": "0.5.0",
+  "name": "jamtur01-puppet_hipchat",
+  "version": "0.5.1",
   "author": "James Turnbull <james@lovedthanlost.net>",
   "license": "Apache-2.0",
   "summary": "A Puppet report handler for sending notifications of failed runs to HipChat",
