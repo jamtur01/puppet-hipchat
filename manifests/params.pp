@@ -6,10 +6,10 @@ class puppet_hipchat::params {
 
   $package_name   = 'hipchat'
   $install_hc_gem = true
-  $puppetboard    = 'false'
-  $dashboard      = 'false'
+  $puppetboard    = false
+  $dashboard      = false
 
-  if $::is_pe or $::is_pe == 'true' {
+  if $::is_pe or $::is_pe == true {
     $puppetconf_path = '/etc/puppetlabs/puppet'
     $provider        = 'pe_gem'
     $owner           = 'pe-puppet'
