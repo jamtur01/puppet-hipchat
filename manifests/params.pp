@@ -4,9 +4,10 @@
 #
 class puppet_hipchat::params {
 
-  $package_name = 'hipchat'
-  $puppetboard  = 'false'
-  $dashboard    = 'false'
+  $package_name   = 'hipchat'
+  $install_hc_gem = true
+  $puppetboard    = 'false'
+  $dashboard      = 'false'
 
   if $::is_pe or $::is_pe == 'true' {
     $puppetconf_path = '/etc/puppetlabs/puppet'
