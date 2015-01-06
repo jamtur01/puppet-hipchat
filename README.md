@@ -6,6 +6,12 @@ Description
 
 A Puppet report handler for sending notifications of Puppet runs to [HipChat](http://www.hipchat.com).
 
+TravisCI status
+---------------
+
+[![Build
+Status](https://travis-ci.org/jamtur01/puppet-hipchat.svg)](https://travis-ci.org/jamtur01/puppet-hipchat)
+
 Requirements
 ------------
 
