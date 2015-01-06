@@ -1,11 +1,11 @@
 ---
-:hipchat_api: '<%= scope.lookupvar('puppet_hipchat::api_key') %>'
-:hipchat_room: '<%= scope.lookupvar('puppet_hipchat::room') %>'
-:hipchat_notify_color: '<%= scope.lookupvar('puppet_hipchat::notify_color') %>'
-:hipchat_notify: <%= scope.lookupvar('puppet_hipchat::notify_room') %>
+:hipchat_api: '<%= @api_key %>'
+:hipchat_room: '<%= @room %>'
+:hipchat_notify_color: '<%= @notify_color %>'
+:hipchat_notify: <%= @notify_room %>
 :hipchat_statuses:
-<% scope.lookupvar('puppet_hipchat::statuses').each do |status| -%>
+<% @statuses.each do |status| -%>
   - <%= status %>
 <% end -%>
-:hipchat_puppetboard: <%= scope.lookupvar('puppet_hipchat::puppetboard') %>
-:hipchat_dashboard: <%= scope.lookupvar('puppet_hipchat::dashboard') %>
+:hipchat_puppetboard: <%= @puppetboard %>
+:hipchat_dashboard: <%= @dashboard %>
