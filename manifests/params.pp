@@ -9,7 +9,7 @@ class puppet_hipchat::params {
   $puppetboard    = false
   $dashboard      = false
 
-  if $::is_pe or $::is_pe == true {
+  if str2bool($::is_pe) {
     $puppetconf_path = '/etc/puppetlabs/puppet'
     $provider        = 'pe_gem'
     $owner           = 'pe-puppet'
