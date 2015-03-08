@@ -4,7 +4,7 @@ require 'yaml'
 begin
   require 'hipchat'
 rescue LoadError
-  Puppet.info "You need the `hipchat` gem to use the Hipchat report"
+  Puppet.warning "You need the `hipchat` gem to use the Hipchat report"
 end
 
 Puppet::Reports.register_report(:hipchat) do
