@@ -5,16 +5,22 @@
 class puppet_hipchat::params {
 
   $package_name   = 'hipchat'
-  $install_hc_gem = true
   $puppetboard    = false
   $dashboard      = false
 
   if str2bool($::is_pe) {
+    $install_hc_gem  = true
     $puppetconf_path = '/etc/puppetlabs/puppet'
     $provider        = 'pe_gem'
     $owner           = 'pe-puppet'
     $group           = 'pe-puppet'
+  } elsif versioncmp('4.0.0', $::puppetversion) < 1 {
+    $puppetconf_path = '/etc/puppetlabs/puppet'
+    $install_hc_gem  = false
+    $owner           = 'puppet'
+    $group           = 'puppet'
   } else {
+    $install_hc_gem  = true
     $puppetconf_path = '/etc/puppet'
     $provider        = 'gem'
     $owner           = 'puppet'

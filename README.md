@@ -30,6 +30,11 @@ puppet-bundled gem library:
 
         $ /opt/puppet/bin/gem install hipchat
 
+*NOTE FOR AIO package 2.0.0 USERS*:  You must install the `hipchat` gem using the
+puppetserver gem utility:
+
+        $ /opt/puppetlabs/bin/puppetserver gem install hipchat
+
 2.  Install puppet-hipchat as a module in your Puppet master's module
     path.
 
