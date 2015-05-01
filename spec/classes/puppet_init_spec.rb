@@ -27,4 +27,11 @@ describe 'puppet_hipchat', :type => :class do
     it { should contain_file('/etc/puppetlabs/puppet/hipchat.yaml') }
   end
 
+  describe 'on puppet 4' do
+    let(:facts) { { :puppetversion => '4.0.0' } }
+    let(:params) { { :api_key => 'mykey', :room => 'myroom' } }
+    it { should_not contain_package('hipchat') }
+    it { should contain_file('/etc/puppetlabs/puppet/hipchat.yaml') }
+  end
+
 end
