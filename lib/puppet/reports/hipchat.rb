@@ -28,7 +28,7 @@ Puppet::Reports.register_report(:hipchat) do
   DISABLED_FILE = File.join([File.dirname(Puppet.settings[:config]), 'hipchat_disabled'])
   HIPCHAT_PROXY = config[:hipchat_proxy]
 
-  if HIPCHAT_PROXY && (RUBY_VERSION < '1.9.3' || Gem.loaded_specs["hipchat"].version < '1.0.0')
+  if HIPCHAT_PROXY && (RUBY_VERSION < '1.9.3' || Gem.loaded_specs["hipchat"].version < Gem::Version.new('1.0.0'))
     raise(Puppet::SettingsError, "hipchat_proxy requires ruby >= 1.9.3 and hipchat gem >= 1.0.0")
   end
 
