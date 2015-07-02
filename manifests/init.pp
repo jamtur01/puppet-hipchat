@@ -5,6 +5,7 @@
 class puppet_hipchat (
   $api_key,
   $room,
+  $server         = 'https://api.hipchat.com'
   $notify_color   = 'red',
   $notify_room    = false,
   $statuses       = [ 'failed' ],
