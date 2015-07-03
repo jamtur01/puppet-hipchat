@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'puppet_hipchat', :type => :class do
   let(:facts) { { :is_pe => false } }
 
-  describe "default" do
+ describe "default" do
     let(:params) { { :api_key => 'mykey', :room => 'myroom' } }
     it { should contain_package('hipchat').with(:provider => 'gem') }
     it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_api: 'mykey'/) }
