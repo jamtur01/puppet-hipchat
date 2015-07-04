@@ -14,6 +14,7 @@ Puppet::Reports.register_report(:hipchat) do
   config = YAML.load_file(configfile)
 
   HIPCHAT_API = config[:hipchat_api]
+  HIPCHAT_SERVER = config[:hipchat_server]
   HIPCHAT_ROOM = config[:hipchat_room]
   HIPCHAT_NOTIFY = config[:hipchat_notify]
   HIPCHAT_STATUSES = Array(config[:hipchat_statuses] || 'failed')
@@ -73,9 +74,9 @@ Puppet::Reports.register_report(:hipchat) do
           msg << ": #{HIPCHAT_DASHBOARD}/nodes/#{self.host}/view"
         end
         if HIPCHAT_PROXY
-          client = HipChat::Client.new(HIPCHAT_API, :http_proxy => HIPCHAT_PROXY)
+          client = HipChat::Client.new(HIPCHAT_API, :http_proxy => HIPCHAT_PROXY, :server_url => HIPCHAT_SERVER)
         else
-          client = HipChat::Client.new(HIPCHAT_API)
+          client = HipChat::Client.new(HIPCHAT_API, :server_url => HIPCHAT_SERVER)
         end
         client[HIPCHAT_ROOM].send('Puppet', msg, :notify => HIPCHAT_NOTIFY, :color => color(self.status), :message_format => 'text')
     end

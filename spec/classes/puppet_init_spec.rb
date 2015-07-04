@@ -4,10 +4,11 @@ describe 'puppet_hipchat', :type => :class do
   let(:facts) { { :is_pe => false } }
 
   describe "default" do
-    let(:params) { { :api_key => 'mykey', :room => 'myroom' } }
+    let(:params) { { :api_key => 'mykey', :room => 'myroom', :server => 'myserver' } }
     it { should contain_package('hipchat').with(:provider => 'gem') }
     it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_api: 'mykey'/) }
     it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_room: 'myroom'/) }
+    it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_server: 'myserver'/) }
   end
 
   describe "specify file location" do
