@@ -88,6 +88,9 @@ Usage
 
     $ touch /etc/puppet/hipchat_disabled
 
+* Modern hipchat installations may not support the default v1 api set
+  `hipchat_api_version` to v2 for modern api support.
+
 Author
 ------
 

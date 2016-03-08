@@ -9,6 +9,12 @@ describe 'puppet_hipchat', :type => :class do
     it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_api: 'mykey'/) }
     it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_room: 'myroom'/) }
     it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_server: 'myserver'/) }
+    it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_api_version: 'v1'\n/) }
+  end
+
+  describe "use api version 2" do
+    let(:params) {{  :api_key => 'mykey', :room => 'myroom', :server => 'myserver', :api_version => 'v2' }}
+    it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_api_version: 'v2'/) }
   end
 
   describe "specify file location" do
