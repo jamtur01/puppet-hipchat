@@ -17,6 +17,7 @@ class puppet_hipchat (
   $group          = $puppet_hipchat::params::group,
   $puppetboard    = $puppet_hipchat::params::puppetboard,
   $dashboard      = $puppet_hipchat::params::dashboard,
+  $api_version    = $puppet_hipchat::params::api_version,
 ) inherits puppet_hipchat::params {
 
   file { $config_file:

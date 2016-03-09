@@ -3,7 +3,8 @@
 :hipchat_server: '<%= @server %>'
 :hipchat_room: '<%= @room %>'
 :hipchat_notify_color: '<%= @notify_color %>'
-:hipchat_notify: <%= @notify_room %>
+:hipchat_notify: '<%= @notify_room %>'
+:hipchat_api_version: '<%= @api_version %>'
 :hipchat_statuses:
 <% @statuses.each do |status| -%>
   - <%= status %>

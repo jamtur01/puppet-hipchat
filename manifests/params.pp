@@ -7,6 +7,7 @@ class puppet_hipchat::params {
   $package_name   = 'hipchat'
   $puppetboard    = false
   $dashboard      = false
+  $api_version    = 'v1'
 
   if str2bool($::is_pe) {
     $install_hc_gem  = true
@@ -14,7 +15,7 @@ class puppet_hipchat::params {
     $provider        = 'pe_gem'
     $owner           = 'pe-puppet'
     $group           = 'pe-puppet'
-  } elsif versioncmp('4.0.0', $::puppetversion) < 1 {
+  } elsif ($::puppetversion) and (versioncmp('4.0.0', $::puppetversion) < 1) {
     $puppetconf_path = '/etc/puppetlabs/puppet'
     $install_hc_gem  = false
     $owner           = 'puppet'
