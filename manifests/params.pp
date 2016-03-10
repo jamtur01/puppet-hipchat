@@ -5,9 +5,10 @@
 class puppet_hipchat::params {
 
   $package_name   = 'hipchat'
-  $puppetboard    = false
-  $dashboard      = false
+  $puppetboard    = undef
+  $dashboard      = undef
   $api_version    = 'v1'
+  $proxy          = undef
 
   if str2bool($::is_pe) {
     $install_hc_gem  = true

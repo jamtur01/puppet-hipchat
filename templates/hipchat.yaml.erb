@@ -1,13 +1,20 @@
 ---
-:hipchat_api: '<%= @api_key %>'
-:hipchat_server: '<%= @server %>'
-:hipchat_room: '<%= @room %>'
-:hipchat_notify_color: '<%= @notify_color %>'
-:hipchat_notify: '<%= @notify_room %>'
-:hipchat_api_version: '<%= @api_version %>'
+:hipchat_api: <%= @api_key %>
+:hipchat_server: <%= @server %>
+:hipchat_room: <%= @room %>
+:hipchat_notify_color: <%= @notify_color %>
+:hipchat_notify: <%= @notify_room %>
+:hipchat_api_version: <%= @api_version %>
 :hipchat_statuses:
 <% @statuses.each do |status| -%>
   - <%= status %>
 <% end -%>
+<% if @puppetboard -%>
 :hipchat_puppetboard: <%= @puppetboard %>
+<% end -%>
+<% if @dashboard -%>
 :hipchat_dashboard: <%= @dashboard %>
+<% end -%>
+<% if @proxy -%>
+:hipchat_proxy: <%= @proxy %>
+<% end -%>
