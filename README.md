@@ -82,6 +82,11 @@ Usage
   node's latest report will be send with the message to HipChat. An
   example file is included.
 
+  *NOTE FOR PUPPETBOARD 0.1.2+ USERS*: if you are using environments other than production
+  you will need to either configure puppetboard default environment to * or set `hipchat_server`
+  to append /%2A, ex: `:hipchat_server: http://hipchat.test.local/%2A` otherwise you will receive
+  a not found error for nodes in environments which are not production.
+
 * To temporarily disable HipChat notifications add a file named
   `hipchat_disabled` in the same path as `hipchat.yaml`. Removing it
   will re-enable notifications.

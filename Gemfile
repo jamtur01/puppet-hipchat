@@ -10,8 +10,9 @@ group :unit_tests do
   gem 'json',                    :require => false
 end
 group :development do
-  gem 'simplecov',   :require => false
-  gem 'guard-rake',  :require => false
+  gem 'simplecov',       :require => false
+  gem 'guard-rake',      :require => false
+  gem 'listen', '3.0.7', :require => false # version 3.1+ removed support for ruby version <2.2
 end
 group :system_tests do
   gem 'vagrant-wrapper',  :require => false

@@ -54,7 +54,7 @@ describe 'puppet_hipchat', :type => :class do
     it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_puppetboard: mypuppetboard\n/) }
   end
 
-  describe 'with puppetboard' do
+  describe 'with dashboard' do
     let(:params) { { :api_key => 'mykey', :room => 'myroom', :server => 'myserver', :dashboard => 'mydashboard' } }
     it { should contain_file('/etc/puppet/hipchat.yaml').with(:content => /:hipchat_dashboard: mydashboard\n/) }
   end
