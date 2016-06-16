@@ -91,10 +91,12 @@ Usage
 * Modern hipchat installations may not support the default v1 api set
   `hipchat_api_version` to v2 for modern api support.
 
-Author
-------
+Team
+----
 
-James Turnbull <james@lovedthanlost.net>
+Maintainer: [James Powis](https://github.com/james-powis)
+
+Original author: James Turnbull <james@lovedthanlost.net>
 
 License
 -------
