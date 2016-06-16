@@ -81,7 +81,7 @@ Puppet::Reports.register_report(:hipchat) do
       Puppet.debug "Sending status for #{self.host} to Hipchat channel #{HIPCHAT_ROOM}"
         msg = "Puppet run for #{self.host} #{emote(self.status)} #{self.status} at #{Time.now.asctime} on #{self.configuration_version} in #{self.environment}"
         if HIPCHAT_PUPPETBOARD
-          msg << ": #{HIPCHAT_PUPPETBOARD}/report/latest/#{self.host}"
+          msg << ": #{HIPCHAT_PUPPETBOARD}/report/#{self.host}/#{self.configuration_version}"
         elsif HIPCHAT_DASHBOARD
           msg << ": #{HIPCHAT_DASHBOARD}/nodes/#{self.host}/view"
         end
