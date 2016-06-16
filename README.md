@@ -19,6 +19,10 @@ Requirements
 
 Installation
 ------------
+*NOTE FOR OPEN SOURCE PUPPET 3 USERS*: The Hipchat gem requires `ruby >= 1.9.3` this
+does not apply to Puppet Enterprise and AIO / Puppet4 installations which provide 
+their own ruby installation > 1.9.3
+
 
 1.  Install the `hipchat` gem on your Puppet master
 
@@ -29,7 +33,7 @@ puppet-bundled gem library:
 
         $ /opt/puppet/bin/gem install hipchat
 
-*NOTE FOR AIO package 2.0.0 USERS*:  You must install the `hipchat` gem using the
+*NOTE FOR AIO package 2.0.0+ USERS*:  You must install the `hipchat` gem using the
 puppetserver gem utility:
 
         $ /opt/puppetlabs/bin/puppetserver gem install hipchat
@@ -39,11 +43,17 @@ puppetserver gem utility:
 
 3.  Create a HipChat API key [here](https://www.hipchat.com/groups/api)
     with a type of Admin. Record the API key that is generated.
+    
+    Alternitively if you are using an on premise hipchat installation,
+    generate an integration key.    
 
 4.  Update the `hipchat_api` and `hipchat_room` variables in the
     `hipchat.yaml` file with your Hipchat connection details and copy
-    the file to `/etc/puppet/` or for Puppet Enterpise
+    the file to `/etc/puppet/` or for Puppet Enterpise and AIO 2.0.0+
     `/etc/puppetlabs/puppet`.
+
+    If you are using an on premise hipchat installation, also update `hipchat_server`
+    with the url to the hipchat server. 
 
 5.  Enable pluginsync and reports on your master and clients in `puppet.conf`
 
