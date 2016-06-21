@@ -1,44 +1,72 @@
 ---
+sudo: false
 language: ruby
 bundler_args: --without system_tests
-script: "bundle install && bundle exec rake validate && bundle exec rake test SPEC_OPTS='--format documentation'"
-rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
+script: 
+  - "bundle exec rake validate"
+  - "bundle exec rake lint"
+  - "bundle exec rake spec SPEC_OPTS='--format documentation --order random'"
 before_install:
   - gem update --system 2.1.11
   - gem --version
-env:
-  - PUPPET_VERSION="~> 2.7.0"
-  - PUPPET_VERSION="~> 3.1.0"
-  - PUPPET_VERSION="~> 3.2.0"
-  - PUPPET_VERSION="~> 3.3.0"
-  - PUPPET_VERSION="~> 3.4.0"
-  - PUPPET_VERSION="~> 3.5.0"
-  - PUPPET_VERSION="~> 3.6.0"
-  - PUPPET_VERSION="~> 3.7.0"
 matrix:
-  exclude:
+  fast_finish: true
+  include:
+    # spec tests
     - rvm: 1.9.3
-      env: PUPPET_VERSION="~> 2.7.0"
+      env: PUPPET_GEM_VERSION="~> 3.0"
     - rvm: 2.0.0
-      env: PUPPET_VERSION="~> 2.7.0"
+      env: PUPPET_GEM_VERSION="~> 3.0"
     - rvm: 2.0.0
-      env: PUPPET_VERSION="~> 3.1.0"
-    - rvm: 2.1.0
-      env: PUPPET_VERSION="~> 2.7.0"
-    - rvm: 2.1.0
-      env: PUPPET_VERSION="~> 3.0.0"
-    - rvm: 2.1.0
-      env: PUPPET_VERSION="~> 3.1.0"
-    - rvm: 2.1.0
-      env: PUPPET_VERSION="~> 3.2.0"
-    - rvm: 2.1.0
-      env: PUPPET_VERSION="~> 3.3.0"
-    - rvm: 2.1.0
-      env: PUPPET_VERSION="~> 3.4.0"
+      env: PUPPET_GEM_VERSION="~> 3.0" FUTURE_PARSER="yes"
+    - rvm: 2.1.7
+      env: PUPPET_GEM_VERSION="~> 4.0"
+
+    # beaker tests
+    - rvm: default
+      sudo: required
+      services: docker
+      env: BEAKER_set="docker/centos-6"
+      bundler_args:
+      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
+    - rvm: default
+      sudo: required
+      services: docker
+      env: BEAKER_set="docker/centos-7"
+      bundler_args:
+      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
+    - rvm: default
+      sudo: required
+      services: docker
+      env: BEAKER_set="docker/debian-7"
+      bundler_args: 
+      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
+    - rvm: default
+      sudo: required
+      services: docker
+      env: BEAKER_set="docker/debian-8"
+      bundler_args:
+      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
+    - rvm: default
+      sudo: required
+      services: docker
+      env: BEAKER_set="docker/ubuntu-12.04"
+      bundler_args:
+      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
+    - rvm: default
+      sudo: required
+      services: docker
+      env: BEAKER_set="docker/ubuntu-14.04"
+      bundler_args:
+      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
+    - rvm: default
+      sudo: required
+      services: docker
+      env: BEAKER_set="docker/ubuntu-16.04"
+      bundler_args:
+      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
 notifications:
   email:
     - james@lovedthanlost.net
+    - powisj@gmail.com
 

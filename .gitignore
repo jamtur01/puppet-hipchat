@@ -2,4 +2,8 @@ spec/fixtures
 pkg/*
 .bundle
 Gemfile.lock
+.vagrant
+junit
+log
+.swp
 

@@ -1,0 +1,12 @@
+HOSTS:
+  ubuntu-14.04-x64:
+    roles:
+      - master
+      - agent
+    platform: ubuntu-14.04-amd64
+    box: ubuntu/trusty64
+    hypervisor: vagrant
+CONFIG:
+  type: aio
+  log_level: debug
+  trace_limit: 200

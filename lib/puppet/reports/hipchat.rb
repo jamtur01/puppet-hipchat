@@ -79,15 +79,20 @@ Puppet::Reports.register_report(:hipchat) do
 
     if (HIPCHAT_STATUSES.include?(self.status) || HIPCHAT_STATUSES.include?('all')) && !disabled
       Puppet.debug "Sending status for #{self.host} to Hipchat channel #{HIPCHAT_ROOM}"
-        msg = "Puppet run for #{self.host} #{emote(self.status)} #{self.status} at #{Time.now.asctime} on #{self.configuration_version} in #{self.environment}"
-        if HIPCHAT_PUPPETBOARD
-          msg << ": #{HIPCHAT_PUPPETBOARD}/report/#{self.host}/#{self.configuration_version}"
-        elsif HIPCHAT_DASHBOARD
-          msg << ": #{HIPCHAT_DASHBOARD}/nodes/#{self.host}/view"
-        end
-        
+      msg = "Puppet run for #{self.host} #{emote(self.status)} #{self.status} at #{Time.now.asctime} on #{self.configuration_version} in #{self.environment}"
+      if HIPCHAT_PUPPETBOARD
+      msg << ": #{HIPCHAT_PUPPETBOARD}/report/#{self.host}/#{self.configuration_version}"
+      elsif HIPCHAT_DASHBOARD
+      msg << ": #{HIPCHAT_DASHBOARD}/nodes/#{self.host}/view"
+      end
+      
+      if HIPCHAT_STATUSES.include?('testing')
+        # Acceptance tests because we cannot test the hipchat gem directly
+        File.open('/tmp/hipchat-notified.txt', 'w') {|f| f.write(msg) }
+      else
         client = HipChat::Client.new(HIPCHAT_API, :http_proxy => HIPCHAT_PROXY, :api_version => HIPCHAT_API_VERSION, :server_url => HIPCHAT_SERVER)
         client[HIPCHAT_ROOM].send('Puppet', msg, :notify => HIPCHAT_NOTIFY, :color => color(self.status), :message_format => 'text')
+      end
     end
   end
 end

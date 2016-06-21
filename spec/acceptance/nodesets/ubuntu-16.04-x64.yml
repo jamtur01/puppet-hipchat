@@ -1,0 +1,12 @@
+HOSTS:
+  ubuntu-16.04-x64:
+    roles:
+      - master
+      - agent
+    platform: ubuntu-16.04-amd64
+    box: boxcutter/ubuntu1604
+    hypervisor: vagrant
+CONFIG:
+  type: aio
+  log_level: debug
+  trace_limit: 200

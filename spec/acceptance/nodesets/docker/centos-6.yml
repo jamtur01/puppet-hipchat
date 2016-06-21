@@ -1,0 +1,15 @@
+HOSTS:
+  centos-6-x64:
+    roles:
+      - master
+      - agent
+    platform: el-6-x86_64
+    hypervisor: docker
+    image: centos:6
+    docker_preserve_image: true
+    docker_image_commands:
+      - 'yum install -y which'
+CONFIG:
+  type: aio
+  log_level: debug
+  trace_limit: 200

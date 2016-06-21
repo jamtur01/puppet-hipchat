@@ -1,23 +1,21 @@
 source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
-group :unit_tests do
-  gem 'rake',                    :require => false
-  gem 'rspec-puppet',            :require => false
-  gem 'puppetlabs_spec_helper',  :require => false
-  gem 'puppet-lint', '1.0.1',    :require => false
-  gem 'puppet-syntax',           :require => false
-  gem 'metadata-json-lint',      :require => false
-  gem 'json',                    :require => false
+group :development, :unit_tests do
+  gem 'json',                   :require => false
+  gem 'metadata-json-lint',     :require => false
+  gem 'puppet-lint',            :require => false           
+  gem 'puppet-syntax',          :require => false
+  gem 'puppetlabs_spec_helper', :require => false
+  gem 'rake',                   :require => false         
+  gem 'rspec-puppet',           :require => false
 end
-group :development do
-  gem 'simplecov',       :require => false
-  gem 'guard-rake',      :require => false
-  gem 'listen', '3.0.7', :require => false # version 3.1+ removed support for ruby version <2.2
-end
+
 group :system_tests do
-  gem 'vagrant-wrapper',  :require => false
-  gem 'beaker-rspec',     :require => false
-  gem 'serverspec',       :require => false
+  gem 'vagrant-wrapper', :require => false
+  gem 'beaker',          :require => false
+  gem 'specinfra',       :require => false
+  gem 'beaker-rspec',    :require => false
+  gem 'serverspec',      :require => false
 end
 
 if facterversion = ENV['FACTER_GEM_VERSION']

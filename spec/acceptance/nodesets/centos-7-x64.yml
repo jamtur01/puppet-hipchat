@@ -1,0 +1,12 @@
+HOSTS:
+  centos-70-x64:
+    roles:
+      - master
+      - agent
+    platform: el-7-x86_64
+    box: puppetlabs/centos-7.0-64-nocm
+    hypervisor: vagrant
+CONFIG:
+  type: aio
+  log_level: debug
+  trace_limit: 200
