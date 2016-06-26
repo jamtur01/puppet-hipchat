@@ -1,5 +1,11 @@
 # Puppet Hipchat
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/jamtur01/puppet_hipchat.svg)](https://forge.puppetlabs.com/jamtur01/puppet_hipchat)
+[![Puppet Forge downloads](https://img.shields.io/puppetforge/dt/jamtur01/puppet_hipchat.svg)](https://forge.puppetlabs.com/jamtur01/puppet_hipchat)
+[![Puppet Forge score](https://img.shields.io/puppetforge/f/jamtur01/puppet_hipchat.svg)](https://forge.puppetlabs.com/jamtur01/puppet_hipchat)
+[![Build Status](https://travis-ci.org/jamtur01/puppet-hipchat.svg?branch=master)](https://travis-ci.org/jamtur01/puppet-hipchat)
+
+
 ## Description
 
 A Puppet report handler for sending notifications of Puppet runs to [HipChat](http://www.hipchat.com).
