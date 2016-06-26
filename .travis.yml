@@ -38,25 +38,7 @@ matrix:
     - rvm: default
       sudo: required
       services: docker
-      env: BEAKER_set="docker/debian-7"
-      bundler_args: 
-      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
-    - rvm: default
-      sudo: required
-      services: docker
       env: BEAKER_set="docker/debian-8"
-      bundler_args:
-      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
-    - rvm: default
-      sudo: required
-      services: docker
-      env: BEAKER_set="docker/ubuntu-12.04"
-      bundler_args:
-      script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
-    - rvm: default
-      sudo: required
-      services: docker
-      env: BEAKER_set="docker/ubuntu-14.04"
       bundler_args:
       script: travis_wait bundle exec rspec spec/acceptance/*_spec.rb
     - rvm: default
