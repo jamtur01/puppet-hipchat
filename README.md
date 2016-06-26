@@ -1,61 +1,134 @@
-puppet-hipchat
-==============
+# Puppet Hipchat
 
-Description
------------
+## Description
 
 A Puppet report handler for sending notifications of Puppet runs to [HipChat](http://www.hipchat.com).
 
-TravisCI status
----------------
+## TravisCI status
 
 [![Build Status](https://travis-ci.org/jamtur01/puppet-hipchat.svg?branch=master)](https://travis-ci.org/jamtur01/puppet-hipchat)
 
-Requirements
-------------
+## Requirements
 
+* `ruby >= 1.9.3` Note: PE puppet-master 3.x and PE/opensource puppetserver bundled versions of ruby should meet required version.
 * `hipchat >= 0.12.0`
 * `puppet`
 
-Installation
-------------
-*NOTE FOR OPEN SOURCE PUPPET 3 USERS*: The Hipchat gem requires `ruby >= 1.9.3` this
-does not apply to Puppet Enterprise and AIO / Puppet4 installations which provide 
-their own ruby installation > 1.9.3
+For Cent/RHEL 6 users running open source puppet-master 3.x, puppet utilizes the system ruby as such the latest repository provided version of ruby is 1.8.7, this means use of RVM or some other method to install a modern version of ruby will be required.
 
+For the room in which you want to receive puppet notifications, add a new BYO Integration. This will return an example url: `https://example.hipchat.com/v2/room/123456789/notification?auth_token=WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S`
+        `https://example.hipchat.com` is the server (you can use on premise hipchat servers as well)
+        `v2` is the api version
+        `123456789` is the room
+        `WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S` is the api_key
 
-1.  Install the `hipchat` gem on your Puppet master
+## Installation
 
-        $ sudo gem install hipchat
+### Installation utilizing puppet
 
-*NOTE FOR PUPPET ENTERPRISE USERS*: You must install the `hipchat` gem using the
-puppet-bundled gem library:
+```puppet
+class { 'puppet_hipchat':
+  server         => 'https://example.hipchat.com',
+  api_version    => 'v2',
+  api_key        => 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S',
+  room           => '123456789',
+  install_hc_gem => true,
+  provider       => 'puppetserver_gem',
+}
+```
 
-        $ /opt/puppet/bin/gem install hipchat
+With puppetboard link: 
 
-*NOTE FOR AIO package 2.0.0+ USERS*:  You must install the `hipchat` gem using the
+```puppet
+class { 'puppet_hipchat':
+  server         => 'https://example.hipchat.com',
+  api_version    => 'v2',
+  api_key        => 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S',
+  room           => '123456789',
+  install_hc_gem => true,
+  provider       => 'puppetserver_gem',
+  puppetboard    => 'https://puppetboard.test.local',
+}
+```
+
+With dashboard link:
+
+```puppet
+class { 'puppet_hipchat':
+  server         => 'https://example.hipchat.com',
+  api_version    => 'v2',
+  api_key        => 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S',
+  room           => '123456789',
+  install_hc_gem => true,
+  provider       => 'puppetserver_gem',
+  dashboard      => 'https://dashboard.test.local',
+}
+```
+
+If you need to use a proxy to reach the hipchat server:
+
+```puppet
+class { 'puppet_hipchat':
+  server         => 'https://example.hipchat.com',
+  api_version    => 'v2',
+  api_key        => 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S',
+  room           => '123456789',
+  install_hc_gem => true,
+  provider       => 'puppetserver_gem',
+  proxy          => 'http://proxy.test.local:8080',
+}
+```
+
+Where provider is the following:
+* `puppetserver_gem` used for opensource and pe puppetserver requires [puppetlabs-pe_gem](https://forge.puppet.com/puppetlabs/puppetserver_gem)
+* `pe_gem` used for PE puppet master 3.x requires [puppetlabs-pe_gem](https://forge.puppet.com/puppetlabs/pe_gem)
+* `gem` used for opensource puppet-master 
+
+Lastly Enable pluginsync and reports on your master and clients in `puppet.conf`
+
+        [master]
+        report = true
+        reports = hipchat
+        pluginsync = true
+        [agent]
+        report = true
+        pluginsync = true
+
+### Manual Installation
+
+1.  Install the `hipchat` gem on your Puppet server
+
+*NOTE FOR PE/Open Source puppetserver package 2.0.0+ USERS*:  You must install the `hipchat` gem using the
 puppetserver gem utility:
 
         $ /opt/puppetlabs/bin/puppetserver gem install hipchat
 
+*NOTE FOR PE puppet-master USERS*: You must install the `hipchat` gem using the
+puppet-bundled gem library:
+
+        $ /opt/puppet/bin/gem install hipchat
+        
+*NOTE FOR Open Source puppet-master USERS*: You must install the `hipchat` gem using the system gem utility:
+        
+        $ sudo gem install hipchat
+
+
 2.  Install puppet-hipchat as a module in your Puppet master's module
     path.
 
-3.  Create a HipChat API key [here](https://www.hipchat.com/groups/api)
-    with a type of Admin. Record the API key that is generated.
-    
-    Alternitively if you are using an on premise hipchat installation,
-    generate an integration key.    
-
-4.  Update the `hipchat_api` and `hipchat_room` variables in the
+3.  Update the `hipchat_server`, `hipchat_api_version`, `hipchat_api`, `hipchat_room` variables in the
     `hipchat.yaml` file with your Hipchat connection details and copy
-    the file to `/etc/puppet/` or for Puppet Enterpise and AIO 2.0.0+
+    the file to `/etc/puppet/` or for PE/OpenSource puppetserver
     `/etc/puppetlabs/puppet`.
+        
+        ---
+        :hipchat_server: 'https://test.hipchat.com'
+        :hipchat_api_version: 'v2',
+        :hipchat_api: 'WzP0dc4oEESuSmF2WJT23GtL5mili9uXof73M48S'
+        :hipchat_room: '123456789'
+        
 
-    If you are using an on premise hipchat installation, also update `hipchat_server`
-    with the url to the hipchat server. 
-
-5.  Enable pluginsync and reports on your master and clients in `puppet.conf`
+4.  Enable pluginsync and reports on your master and clients in `puppet.conf`
 
         [master]
         report = true
@@ -94,16 +167,13 @@ Usage
   *NOTE FOR PUPPETBOARD 0.1.2+ USERS*: if you are using environments other than production
   you will need to either configure puppetboard default environment to * or set `hipchat_server`
   to append /%2A, ex: `:hipchat_server: http://hipchat.test.local/%2A` otherwise you will receive
-  a not found error for nodes in environments which are not production.
+  a not found error for any nodes in environments other than `production`.
 
 * To temporarily disable HipChat notifications add a file named
   `hipchat_disabled` in the same path as `hipchat.yaml`. Removing it
   will re-enable notifications.
 
     $ touch /etc/puppet/hipchat_disabled
-
-* Modern hipchat installations may not support the default v1 api set
-  `hipchat_api_version` to v2 for modern api support.
 
 Team
 ----
